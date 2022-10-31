@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('{safe_url}', function ($safe_url) {
     dd($safe_url);
-    $application = DB::table('applications')->where('domain', request()->getHost())->get()->firstOrFail();
-    $page = DB::table([['application_id', $application->id], ['safe_name', $safe_url]])->get()->firstOrFail();
+    $application = DB::table('Application')->where('domain', request()->getHost())->get()->firstOrFail();
+    $page = DB::table('Page')->where([['application_id', $application->id], ['safe_name', $safe_url]])->get()->firstOrFail();
     if (!$page) {
         abort(404);
     }
