@@ -13,8 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('{safe_url?}', function ($safe_url) {
-    dd($safe_url,request()->getHost());
+Route::get('/', function () {
+    $application = DB::table('Application')->where('domain', request()->getHost())->get()->firstOrFail();
+    $page = DB::table('Page')->where([['application_id', $application->id], ['safe_name', "index"]])->get()->firstOrFail();
+    if (!$page) {
+        abort(404);
+    }
+    return view('hosted', ['application' => $application, 'page' => $page]);
+});
+
+
+Route::get('{safe_url}', function ($safe_url) {
     $application = DB::table('Application')->where('domain', request()->getHost())->get()->firstOrFail();
     $page = DB::table('Page')->where([['application_id', $application->id], ['safe_name', $safe_url]])->get()->firstOrFail();
     if (!$page) {
