@@ -27,7 +27,6 @@ Route::get('/', function () {
 
 
 Route::get('{safe_url}', function ($safe_url) {
-    dd(request()->getHost());
     $application = DB::table('Application')->where('domain', request()->getHost())->get()->first();
     if (!$application) {
         abort(404);
