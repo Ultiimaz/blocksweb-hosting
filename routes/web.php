@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $application = DB::table('Application')->where('domain', request()->getHost())->get()->first();
+    if (!$application) {
+        abort(404);
+    }
     $page = DB::table('Page')->where([['application_id', $application->id], ['safe_name', "index"]])->get()->first();
     if (!$page) {
         abort(404);
@@ -25,6 +28,9 @@ Route::get('/', function () {
 
 Route::get('{safe_url}', function ($safe_url) {
     $application = DB::table('Application')->where('domain', request()->getHost())->get()->first();
+    if (!$application) {
+        abort(404);
+    }
     $page = DB::table('Page')->where([['application_id', $application->id], ['safe_name', $safe_url]])->get()->first();
     if (!$page) {
         abort(404);
