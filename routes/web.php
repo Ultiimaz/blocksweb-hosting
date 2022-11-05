@@ -14,26 +14,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $application = DB::table('Application')->where('domain', request()->getHost())->get()->first();
-    if (!$application) {
+    $workspace = DB::table('Workspace')->where('domain', request()->getHost())->get()->first();
+    if (!$workspace) {
         abort(404);
     }
-    $page = DB::table('Page')->where([['application_id', $application->id], ['safe_name', "index"]])->get()->first();
+    $page = DB::table('Page')->where([['workspace_id', $workspace->id], ['safe_name', "index"]])->get()->first();
     if (!$page) {
         abort(404);
     }
-    return view('hosted', ['application' => $application, 'page' => $page]);
+    return view('hosted', ['workspace' => $workspace, 'page' => $page]);
 });
 
 
 Route::get('{safe_url}', function ($safe_url) {
-    $application = DB::table('Application')->where('domain', request()->getHost())->get()->first();
-    if (!$application) {
+    $workspace = DB::table('Workspace')->where('domain', request()->getHost())->get()->first();
+    if (!$workspace) {
         abort(404);
     }
-    $page = DB::table('Page')->where([['application_id', $application->id], ['safe_name', $safe_url]])->get()->first();
+    $page = DB::table('Page')->where([['application_id', $workspace->id], ['safe_name', $safe_url]])->get()->first();
     if (!$page) {
         abort(404);
     }
-    return view('hosted', ['application' => $application, 'page' => $page]);
+    return view('hosted', ['workspace' => $workspace, 'page' => $page]);
 });
