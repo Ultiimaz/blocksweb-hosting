@@ -9,9 +9,16 @@ use Illuminate\Support\Str;
 
 class AssetController extends Controller
 {
-    public function index(\App\Models\Application $application)
+    public function index($workspace)
     {
-        return $application->assets()->get();
+        $workspace = DB::table('Workspace')->where('id', $workspace)->get()->first();
+        if (!$workspace) {
+            abort(404);
+        }
+        $assets = DB::table('Asset')->where('workspace_id', $workspace->id)->get();
+
+        return $assets;
+
     }
 
     /**
@@ -24,7 +31,7 @@ class AssetController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store($workspace, Request $request)
     {
         if (!$request->file('file')) {
             return response('error uploading file', 400);
@@ -48,6 +55,7 @@ class AssetController extends Controller
             'height' => 350,
             'width' => 200
         );
+        
         return $result;
     }
 
