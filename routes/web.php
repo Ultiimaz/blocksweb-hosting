@@ -37,5 +37,3 @@ Route::get('{safe_url}', function ($safe_url) {
     }
     return view('hosted', ['workspace' => $workspace, 'page' => $page]);
 });
-
-Route::resource('assets/{workspace}', AssetController::class);
