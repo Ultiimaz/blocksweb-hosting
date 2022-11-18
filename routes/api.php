@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('workspace/{workspace}',[AssetController::class, 'store']);
-Route::get('workspace/{workspace}', [AssetController::class, 'index']);
+Route::post('workspace/{workspace}/assets',[AssetController::class, 'store']);
+Route::get('workspace/{workspace}/assets', [AssetController::class, 'index']);
