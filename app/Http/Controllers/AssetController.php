@@ -51,7 +51,7 @@ class AssetController extends Controller
         $result = array(
             'name' => $generatedFileName.'.'.$mimeType,
             'type' => 'image',
-            'src' => "https://assets.blocksweb.cloud/".'/images/'.$generatedFileName.'.'.$mimeType,
+            'src' => "https://assets.blocksweb.cloud".'/images/'.$generatedFileName.'.'.$mimeType,
             'height' => 350,
             'width' => 200
         );
