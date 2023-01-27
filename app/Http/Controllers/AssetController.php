@@ -38,9 +38,9 @@ class AssetController extends Controller
 
         $file = $request->file('file');
         $generatedFileName = Str::random(16);
-        $mimes = new \Mimey\MimeTypes;
+        // $mimes = new \Mimey\MimeTypes;
 
-        $mimeType = $mimes->getExtension($file->getMimeType());
+        // $mimeType = $mimes->getExtension($file->getMimeType());
 
 
         Storage::disk('s3')->put($generatedFileName, $file);;
@@ -51,7 +51,7 @@ class AssetController extends Controller
         // $width = $size[0];
         // $height = $size[1];
         $result = array(
-            'name' => $generatedFileName . '.' . $mimeType,
+            'name' => $generatedFileName,
             'type' => 'image',
             'src' =>  Storage::url($generatedFileName),
             'height' => 350,
