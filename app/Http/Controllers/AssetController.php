@@ -18,7 +18,6 @@ class AssetController extends Controller
         $assets = DB::table('Asset')->where('workspace_id', $workspace->id)->get();
 
         return $assets;
-
     }
 
     /**
@@ -37,25 +36,28 @@ class AssetController extends Controller
             return response('error uploading file', 400);
         }
 
-        $file =$request->file('file');
+        $file = $request->file('file');
         $generatedFileName = Str::random(16);
         $mimes = new \Mimey\MimeTypes;
 
-        $mimeType= $mimes->getExtension($file->getMimeType());
+        $mimeType = $mimes->getExtension($file->getMimeType());
 
-        $file->move(public_path('images'),$generatedFileName.'.'.$mimeType);
-        
+
+        Storage::disk('s3')->put($generatedFileName, $file);;
+
+        // $file->move(public_path('images'), $generatedFileName . '.' . $mimeType);
+
         // $size = getimagesize(public_path('images').$generatedFileName.'.'.$mimeType);
         // $width = $size[0];
         // $height = $size[1];
         $result = array(
-            'name' => $generatedFileName.'.'.$mimeType,
+            'name' => $generatedFileName . '.' . $mimeType,
             'type' => 'image',
-            'src' => "https://assets.blocksweb.cloud".'/images/'.$generatedFileName.'.'.$mimeType,
+            'src' =>  Storage::url($generatedFileName),
             'height' => 350,
             'width' => 200
         );
-        
+
         return $result;
     }
 
