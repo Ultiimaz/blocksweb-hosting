@@ -54,7 +54,7 @@ class AssetController extends Controller
         $result = array(
             'name' => $generatedFileName,
             'type' => 'image',
-            'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . Storage::url($generatedFileName) . $file,
+            'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . Storage::path("assets/" . $generatedFileName) . $file,
             'height' => 350,
             'width' => 200
         );
