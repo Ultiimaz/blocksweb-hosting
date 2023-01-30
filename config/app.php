@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        App\Providers\DOSpacesStorageServiceProvider::class,
+        App\Providers\DigitalOceanSpacesStorageServiceProvider::class,
 
         /*
          * Package Service Providers...
