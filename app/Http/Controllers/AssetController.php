@@ -57,7 +57,7 @@ class AssetController extends Controller
             'name' => $generatedFileName,
             'type' => 'image',
             // 'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . $file . $mimeType,
-            'src' => $url,
+            'src' => 'https://content.blocksweb.cloud/assets/' . $generatedFileName,
             'height' => 350,
             'width' => 200
         );
