@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Asset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -43,7 +44,7 @@ class AssetController extends Controller
         // $mimeType = $mimes->getExtension($file->getMimeType());
 
 
-        Storage::disk('do-spaces')->put($generatedFileName, $file);;
+        Storage::disk('do-spaces')->put("assets/" . $generatedFileName, $file);
 
         // $file->move(public_path('images'), $generatedFileName . '.' . $mimeType);
 
@@ -53,7 +54,7 @@ class AssetController extends Controller
         $result = array(
             'name' => $generatedFileName,
             'type' => 'image',
-            'src' =>  Storage::url($generatedFileName),
+            'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . Storage::url($generatedFileName) . $file,
             'height' => 350,
             'width' => 200
         );
