@@ -39,9 +39,9 @@ class AssetController extends Controller
 
         $file = $request->file('file');
         $generatedFileName = Str::random(16);
-        // $mimes = new \Mimey\MimeTypes;
+        $mimes = new \Mimey\MimeTypes;
 
-        // $mimeType = $mimes->getExtension($file->getMimeType());
+        $mimeType = $mimes->getExtension($file->getMimeType());
 
 
         Storage::disk('do-spaces')->put("assets/" . $generatedFileName, $file);
@@ -54,7 +54,7 @@ class AssetController extends Controller
         $result = array(
             'name' => $generatedFileName,
             'type' => 'image',
-            'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . '/' . $file,
+            'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . $file . $mimeType,
             'height' => 350,
             'width' => 200
         );
