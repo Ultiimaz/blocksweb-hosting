@@ -33,31 +33,21 @@ class AssetController extends Controller
 
     public function store($workspace, Request $request)
     {
-        if (!$request->file('file')) {
-            return response('error uploading file', 400);
-        }
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-        $file = $request->file('file');
-        $generatedFileName = Str::random(16);
-        $mimes = new \Mimey\MimeTypes;
+        $imageName = time() . '.' . $request->image->extension();
 
-        $mimeType = $mimes->getExtension($file->getMimeType());
+        $path = Storage::disk('s3')->put('images', $request->image);
+        $path = Storage::disk('s3')->url($path);
 
-
-        Storage::disk('do-spaces')->put($workspace . "/assets/", $file);
-
-        // $file->move(public_path('images'), $generatedFileName . '.' . $mimeType);
-
-        // $size = getimagesize(public_path('images').$generatedFileName.'.'.$mimeType);
-        // $width = $size[0];
-        // $height = $size[1];
-
-        $url = Storage::url("assets/" . $generatedFileName);
+        /* Store $imageName name in DATABASE from HERE */
         $result = array(
-            'name' => $generatedFileName,
+            'name' => $path,
             'type' => 'image',
             // 'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . $file . $mimeType,
-            'src' => $file,
+            'src' => $path,
             'height' => 350,
             'width' => 200
         );
