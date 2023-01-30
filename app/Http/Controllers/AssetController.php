@@ -43,7 +43,7 @@ class AssetController extends Controller
         // $mimeType = $mimes->getExtension($file->getMimeType());
 
 
-        Storage::disk('s3')->put($generatedFileName, $file);;
+        Storage::disk('do-spaces')->put($generatedFileName, $file);;
 
         // $file->move(public_path('images'), $generatedFileName . '.' . $mimeType);
 

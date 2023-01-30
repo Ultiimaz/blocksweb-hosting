@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -64,6 +64,14 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        'do-spaces' => [
+            'driver' => 'do-spaces',
+            'key' => env('SPACES_KEY'),
+            'secret' => env('SPACES_SECRET'),
+            'region' => env('SPACES_REGION'), // can be anything
+            'bucket' => env('SPACES_BUCKET'), // your space name
+            'endpoint' => env('SPACES_ENDPOINT') // spaces endpoint (currently : `https://nyc3.digitaloceanspaces.com`)
+        ]
 
     ],
 
