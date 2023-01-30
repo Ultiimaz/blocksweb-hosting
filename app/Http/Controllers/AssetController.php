@@ -54,7 +54,7 @@ class AssetController extends Controller
         $result = array(
             'name' => $generatedFileName,
             'type' => 'image',
-            'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName,
+            'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . '/' . $file,
             'height' => 350,
             'width' => 200
         );
