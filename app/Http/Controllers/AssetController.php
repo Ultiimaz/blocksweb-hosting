@@ -51,10 +51,13 @@ class AssetController extends Controller
         // $size = getimagesize(public_path('images').$generatedFileName.'.'.$mimeType);
         // $width = $size[0];
         // $height = $size[1];
+
+        $url = Storage::url("assets/" . $generatedFileName);
         $result = array(
             'name' => $generatedFileName,
             'type' => 'image',
-            'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . $file . $mimeType,
+            // 'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . $file . $mimeType,
+            'src' => $url,
             'height' => 350,
             'width' => 200
         );
