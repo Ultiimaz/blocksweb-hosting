@@ -44,7 +44,7 @@ class AssetController extends Controller
         $mimeType = $mimes->getExtension($file->getMimeType());
 
 
-        Storage::disk('do-spaces')->put("assets/" . $generatedFileName, $file);
+        Storage::disk('do-spaces')->put($workspace . "/assets/", $file);
 
         // $file->move(public_path('images'), $generatedFileName . '.' . $mimeType);
 
@@ -57,7 +57,7 @@ class AssetController extends Controller
             'name' => $generatedFileName,
             'type' => 'image',
             // 'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . $file . $mimeType,
-            'src' => 'https://content.blocksweb.cloud/assets/' . $generatedFileName,
+            'src' => $file,
             'height' => 350,
             'width' => 200
         );
