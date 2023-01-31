@@ -39,7 +39,7 @@ class AssetController extends Controller
 
         $imageName = time() . '.' . $request->file->extension();
 
-        $path = Storage::disk('do-spaces')->put('images', $request->file);
+        $path = Storage::disk('do-spaces')->put('images', $request->file, 'public');
         $path = Storage::disk('do-spaces')->url($path);
         $path = str_replace("https://blocksweb-cms.fra1.digitaloceanspaces.com/", "https://content.blocksweb.cloud/", $path);
 
