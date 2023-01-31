@@ -41,10 +41,10 @@ class AssetController extends Controller
 
         $path = Storage::disk('do-spaces')->put('images', $request->file);
         $path = Storage::disk('do-spaces')->url($path);
+        $path = str_replace("https://blocksweb-cms.fra1.digitaloceanspaces.com/", "https://content.blocksweb.cloud/", $path);
 
         /* Store $imageName name in DATABASE from HERE */
         $result = array(
-            'name' => $path,
             'type' => 'image',
             // 'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . $file . $mimeType,
             'src' => $path,
