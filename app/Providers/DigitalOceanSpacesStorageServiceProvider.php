@@ -29,6 +29,7 @@ class DigitalOceanSpacesStorageServiceProvider extends ServiceProvider
                 'bucket_endpoint' => false,
                 'use_path_style_endpoint' => false,
                 'endpoint'    => $config["endpoint"],
+                'visibility' => 'public',
             ]);
             return new Filesystem(new AwsS3Adapter($client, $config["bucket"]));
         });
