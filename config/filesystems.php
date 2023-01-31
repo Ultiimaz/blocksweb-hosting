@@ -70,7 +70,8 @@ return [
             'secret' => env('SPACES_SECRET'),
             'region' => env('SPACES_REGION'), // can be anything
             'bucket' => env('SPACES_BUCKET'), // your space name
-            'endpoint' => env('SPACES_ENDPOINT') // spaces endpoint (currently : `https://nyc3.digitaloceanspaces.com`)
+            'endpoint' => env('SPACES_ENDPOINT'), // spaces endpoint (currently : `https://nyc3.digitaloceanspaces.com`)
+            'visibility' => 'public',
         ]
 
     ],
