@@ -39,8 +39,8 @@ class AssetController extends Controller
 
         $imageName = time() . '.' . $request->file->extension();
 
-        $path = Storage::disk('s3')->put('images', $request->file);
-        $path = Storage::disk('s3')->url($path);
+        $path = Storage::disk('do-spaces')->put('images', $request->file);
+        $path = Storage::disk('do-spaces')->url($path);
 
         /* Store $imageName name in DATABASE from HERE */
         $result = array(
