@@ -37,9 +37,9 @@ class AssetController extends Controller
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = time() . '.' . $request->image->extension();
+        $imageName = time() . '.' . $request->file->extension();
 
-        $path = Storage::disk('s3')->put('images', $request->image);
+        $path = Storage::disk('s3')->put('images', $request->file);
         $path = Storage::disk('s3')->url($path);
 
         /* Store $imageName name in DATABASE from HERE */
