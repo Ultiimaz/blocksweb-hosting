@@ -34,7 +34,8 @@ class AssetController extends Controller
     public function store($workspace, Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // image of max 12mb
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:12000',
         ]);
 
         $imageName = time() . '.' . $request->file->extension();
