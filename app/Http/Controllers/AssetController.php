@@ -35,10 +35,9 @@ class AssetController extends Controller
     {
         $request->validate([
             // image of max 12mb
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:12000',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        $imageName = time() . '.' . $request->file->extension();
 
         $path = Storage::disk('do-spaces')->put('images', $request->file, 'public');
         $path = Storage::disk('do-spaces')->url($path);
@@ -47,10 +46,7 @@ class AssetController extends Controller
         /* Store $imageName name in DATABASE from HERE */
         $result = array(
             'type' => 'image',
-            // 'src' => "https://blocksweb-cms.fra1.cdn.digitaloceanspaces.com/" . "assets/" . $generatedFileName . $file . $mimeType,
-            'src' => $path,
-            'height' => 350,
-            'width' => 200
+            'src' => $path
         );
 
         return $result;
