@@ -14,7 +14,7 @@ class AssetController extends Controller
     {
         $workspace = DB::table('Workspace')->where('id', $workspace)->get()->first();
         if (!$workspace) {
-            abort(404);
+            abort(400);
         }
         $assets = DB::table('Asset')->where('workspace_id', $workspace->id)->get();
 
